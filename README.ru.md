@@ -134,7 +134,8 @@ Photoshop может не хранить цвет полностью прозр�
 утилитой SDK `Cnvtpipl.exe`.
 
 Архив релиза: `powershell -ExecutionPolicy Bypass -File tools\make_release.ps1`
-→ `dist\VTFExport-<версия>.zip`.
+→ `dist\VTFExport-<версия>.zip`. Скрипт откажется упаковывать плагин, в котором остался путь
+к папке сборки (по нему видно имя пользователя).
 
 ### Тесты
 

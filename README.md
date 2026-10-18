@@ -134,7 +134,8 @@ The pre-build step embeds `lang\*.lang` with `tools\embed_lang.ps1` (PowerShell)
 resource is compiled with the SDK's `Cnvtpipl.exe`.
 
 Release archive: `powershell -ExecutionPolicy Bypass -File tools\make_release.ps1`
-→ `dist\VTFExport-<version>.zip`.
+→ `dist\VTFExport-<version>.zip`. The script refuses to pack a plug-in that contains the
+path of your build folder (it would reveal your user name).
 
 ### Tests
 

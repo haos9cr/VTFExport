@@ -66,6 +66,9 @@
     </ResourceCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <!-- Store only "VTFExport.pdb" in the .8bi instead of the full path of the
+           build folder (which would reveal e.g. C:\Users\<name>\...). -->
+      <AdditionalOptions>/PDBALTPATH:%25_PDB%25 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>user32.lib;advapi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
