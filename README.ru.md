@@ -141,7 +141,7 @@ Photoshop может не хранить цвет полностью прозр�
 Ядро (кодировщик, декодер, фильтры, анимация) и сам плагин проверяются на Linux без Photoshop и SDK:
 
 ```sh
-pip install srctools
+pip install srctools pillow
 tests/run_tests.sh          # ядро: g++ + python
 tests/run_tests.sh --wine   # + плагин под Wine с эмуляторами Photoshop (нужны MinGW и Wine)
 ```

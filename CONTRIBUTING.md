@@ -42,7 +42,7 @@ Until then the English text is shown.
 - Build: see *Building from source* in [README.md](README.md) (needs the Photoshop SDK).
 - Run the tests before a pull request:
   ```sh
-  pip install srctools
+  pip install srctools pillow
   tests/run_tests.sh            # core tests
   tests/run_tests.sh --wine     # + plug-in tests under Wine (MinGW + Wine)
   ```

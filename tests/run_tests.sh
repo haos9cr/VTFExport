@@ -6,7 +6,7 @@
 #                                   MinGW against tests/sdk_stub and runs fake
 #                                   Photoshop hosts under Wine
 #
-# Requirements: g++, python3, `pip install srctools`;
+# Requirements: g++, python3, `pip install srctools pillow`;
 # for --wine also x86_64-w64-mingw32-g++ / -windres and wine.
 set -euo pipefail
 
@@ -25,16 +25,21 @@ PY="python3 -I"
 fail=0
 step() { echo; echo "=== $* ==="; }
 run() { if ! "$@"; then echo "*** FAILED: $*"; fail=1; fi; }
+# run_tail N cmd...: like run, but prints only the last N lines of the output.
+run_tail() {
+    local n=$1; shift
+    if "$@" > step.log 2>&1; then tail -n "$n" step.log; else cat step.log; echo "*** FAILED: $*"; fail=1; fi
+}
 
 step "Writer: every format x versions 7.1-7.5 (checked with srctools)"
 $CXX $CXXFLAGS "$ROOT/tests/test_writer.cpp" $CORE -o test_writer
 mkdir -p writer
 run ./test_writer writer
-run $PY "$ROOT/tests/validate.py" writer | tail -3
+run_tail 3 $PY "$ROOT/tests/validate.py" writer
 
 step "Reader vs srctools (formats, animation, cubemaps, volume, broken files)"
 $CXX $CXXFLAGS "$ROOT/tests/read_dump.cpp" $CORE -o read_dump
-run $PY "$ROOT/tests/validate_reader.py" ./read_dump writer reader | tail -12
+run_tail 12 $PY "$ROOT/tests/validate_reader.py" ./read_dump writer reader
 
 step "Filters and resize"
 $CXX $CXXFLAGS "$ROOT/tests/resample_test.cpp" $CORE -o resample_test
@@ -74,7 +79,7 @@ if [[ $WINE_TESTS == 1 ]]; then
     for fmt in 12 1000; do
         mkdir -p host$fmt
         run wine fake_host.exe VTFExport.8bi "$(wpath host$fmt)" $fmt
-        run $PY "$ROOT/tests/validate_host.py" host$fmt | tail -1
+        run_tail 1 $PY "$ROOT/tests/validate_host.py" host$fmt
     done
 
     step "Fake host: open + re-save keeps settings"
@@ -86,7 +91,7 @@ if [[ $WINE_TESTS == 1 ]]; then
         run wine fake_host_read.exe VTFExport.8bi "$(wpath "$f")" "$(wpath roundtrip)\\$b.rgba" \
             "$(wpath roundtrip)\\$b.resaved.vtf" > /dev/null
     done
-    run $PY "$ROOT/tests/validate_roundtrip.py" roundtrip "${srcs[@]}" | tail -1
+    run_tail 1 $PY "$ROOT/tests/validate_roundtrip.py" roundtrip "${srcs[@]}"
 
     step "Fake host: animation as layers (order, names, hidden layer, merged image)"
     mkdir -p layers

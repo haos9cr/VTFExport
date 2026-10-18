@@ -142,7 +142,7 @@ The core (encoder, decoder, filters, animation) and the plug-in itself are teste
 without Photoshop or the SDK:
 
 ```sh
-pip install srctools
+pip install srctools pillow
 tests/run_tests.sh          # core: g++ + python
 tests/run_tests.sh --wine   # + plug-in under Wine with fake Photoshop hosts (needs MinGW + Wine)
 ```
