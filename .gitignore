@@ -1,0 +1,16 @@
+# Build output
+bin/
+obj/
+dist/
+build/
+.vs/
+*.user
+*.aps
+
+# Photoshop SDK: download it yourself, it may not be redistributed
+photoshop_sdk/*
+!photoshop_sdk/PUT_SDK_HERE.txt
+
+# Python
+__pycache__/
+*.pyc

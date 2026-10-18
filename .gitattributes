@@ -1,0 +1,17 @@
+* text=auto
+
+# Visual Studio and Windows scripts keep CRLF
+*.sln       text eol=crlf
+*.vcxproj   text eol=crlf
+*.rc        text eol=crlf
+*.r         text eol=crlf
+*.ps1       text eol=crlf
+
+# Shell scripts must stay LF
+*.sh        text eol=lf
+
+# Translations: UTF-8 text
+*.lang      text
+*.lang.txt  text
+
+*.png       binary

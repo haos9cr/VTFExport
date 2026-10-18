@@ -1,0 +1,64 @@
+# VTF Export - Deutsch
+language.name = Deutsch
+language.code = de
+
+dlg.title = VTF speichern
+dlg.size = Größe: {w} x {h}
+dlg.size_resized = Größe: {w} x {h}  → {tw} x {th}
+dlg.language = Sprache:
+dlg.language_auto = Automatisch
+dlg.group_format = Format
+dlg.format = Format:
+dlg.version = Version:
+dlg.group_resize = Größe ändern
+dlg.resize = Auf Zweierpotenz skalieren
+dlg.resize_method = Methode:
+dlg.resize_filter = Filter:
+dlg.max_width = Max. Breite:
+dlg.max_height = Max. Höhe:
+dlg.no_limit = Keine Grenze
+
+resize.nearest = Nächste Zweierpotenz
+resize.biggest = Größere Zweierpotenz
+resize.smallest = Kleinere Zweierpotenz
+
+dlg.group_mips = Mipmaps und Vorschaubild
+dlg.mipmaps = Mipmaps erzeugen
+dlg.mip_filter = Mipmap-Filter:
+dlg.gamma = Gammakorrekte Filterung (Größe und Mipmaps)
+dlg.thumb = Vorschaubild (Thumbnail) erzeugen
+dlg.group_anim = Animation
+dlg.animate = Ebenen → Animationsframes (sichtbare Ebenen: {n})
+dlg.frame_order = Frame-Reihenfolge:
+dlg.anim_hint = Ebeneneffekte und Füllmethoden werden nicht angewendet.
+
+order.bottom_up = Unten nach oben (unten = Frame 1)
+order.top_down = Oben nach unten (oben = Frame 1)
+
+dlg.group_flags = Textur-Flags
+dlg.reset = Zurücksetzen
+dlg.save = Speichern
+dlg.cancel = Abbrechen
+
+fmt.auto_dxt = Automatisch: DXT1 (ohne Alpha) / DXT5 (mit Alpha)
+fmt.auto_raw = Automatisch: BGR888 / BGRA8888 (unkomprimiert)
+fmt.i8 = I8 (Graustufen)
+fmt.ia88 = IA88 (Graustufen + Alpha)
+fmt.a8 = A8 (nur Alpha)
+
+layer.frame = Frame {n}
+
+msg.mode = VTF: Nur die Modi RGB und Graustufen werden unterstützt.
+msg.too_big = VTF: Die maximale Texturgröße beträgt 65535 x 65535.
+msg.npot = Die Bildgröße ist keine Zweierpotenz (z. B. 512 x 256).\nDie Source Engine zeigt eine solche Textur eventuell falsch an.\n\nTrotzdem speichern?
+msg.encode_error = VTF: Fehler beim Kodieren: {error}
+msg.open_error = Die VTF-Datei kann nicht geöffnet werden: {error}
+msg.too_large = Die Textur ist für diese Photoshop-Version zu groß.
+msg.open_partial = Von dieser Textur wird nur ein Teil geöffnet:
+msg.cubemap = - sie ist eine Cubemap ({faces} Seiten): nur die erste Seite wird geöffnet;
+msg.volume = - sie ist eine Volumentextur ({depth} Schichten): nur die erste Schicht wird geöffnet;
+msg.format_note = Format: {format}
+msg.layer_error = Die Ebene „{name}“ des Dokuments kann nicht gelesen werden.
+
+about.title = Über VTF Export
+about.text = VTF Export {version} für Adobe Photoshop (x64)\n\nÖffnet und speichert Valve-Texture-Format-Dateien (.vtf).\nAnimierte Texturen werden als Ebenen geöffnet; sichtbare Ebenen können als Frames gespeichert werden.\nSpeichern: DXT1/3/5, BGR(A)8888, RGB(A)8888, 565/4444/5551, I8, IA88, A8,\nSkalierung auf Zweierpotenz, Mipmaps mit 15 Filtern, Vorschaubild, Flags, Versionen 7.1 - 7.5.\n\nSprachordner: {folder}\n\nDXT-Kompression: stb_dxt (Public Domain).

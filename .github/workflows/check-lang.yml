@@ -1,0 +1,16 @@
+# Checks translation files (unknown keys, placeholders, duplicate codes) on every push / PR.
+name: check-lang
+on:
+  push:
+    paths: ["lang/**", "src/Lang.cpp", "tools/check_lang.py"]
+  pull_request:
+    paths: ["lang/**", "src/Lang.cpp", "tools/check_lang.py"]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: python tools/check_lang.py

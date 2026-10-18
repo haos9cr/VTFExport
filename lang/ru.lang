@@ -1,0 +1,65 @@
+# VTF Export - Русский
+language.name = Русский
+language.code = ru
+
+dlg.title = Сохранение VTF
+dlg.size = Размер: {w} x {h}
+dlg.size_resized = Размер: {w} x {h}  → {tw} x {th}
+dlg.language = Язык:
+dlg.language_auto = Авто
+dlg.group_format = Формат
+dlg.format = Формат:
+dlg.version = Версия:
+dlg.group_resize = Изменение размера
+dlg.resize = Привести размер к степени двойки
+dlg.resize_method = Способ:
+dlg.resize_filter = Фильтр:
+dlg.max_width = Макс. ширина:
+dlg.max_height = Макс. высота:
+dlg.no_limit = Без ограничения
+
+resize.nearest = Ближайшая степень двойки
+resize.biggest = Большая степень двойки
+resize.smallest = Меньшая степень двойки
+
+dlg.group_mips = Мипмапы и превью
+dlg.mipmaps = Генерировать мипмапы
+dlg.mip_filter = Фильтр мипмапов:
+dlg.gamma = Гамма-корректная фильтрация (размер и мипмапы)
+dlg.thumb = Создать превью (thumbnail)
+dlg.group_anim = Анимация
+dlg.animate = Слои → кадры анимации (видимых слоёв: {n})
+dlg.frame_order = Порядок кадров:
+dlg.anim_hint = Эффекты и режимы наложения слоёв не применяются.
+
+order.bottom_up = Снизу вверх (нижний слой = кадр 1)
+order.top_down = Сверху вниз (верхний слой = кадр 1)
+
+dlg.group_flags = Флаги текстуры
+dlg.reset = Сбросить
+dlg.save = Сохранить
+dlg.cancel = Отмена
+
+fmt.auto_dxt = Авто: DXT1 (без альфы) / DXT5 (с альфой)
+fmt.auto_raw = Авто: BGR888 / BGRA8888 (без сжатия)
+fmt.i8 = I8 (оттенки серого)
+fmt.ia88 = IA88 (серый + альфа)
+fmt.a8 = A8 (только альфа)
+
+layer.frame = Кадр {n}
+
+msg.title = VTF Export
+msg.mode = VTF: поддерживаются только режимы RGB и Grayscale.
+msg.too_big = VTF: максимальный размер текстуры 65535 x 65535.
+msg.npot = Размер изображения не является степенью двойки (например 512 x 256).\\nSource Engine может отображать такую текстуру некорректно.\\n\\nВсё равно сохранить?
+msg.encode_error = VTF: ошибка кодирования: {error}
+msg.open_error = Не удалось открыть VTF-файл: {error}
+msg.too_large = Текстура слишком большая для этой версии Photoshop.
+msg.open_partial = Будет открыта только часть текстуры:
+msg.cubemap = - это кубическая карта ({faces} граней): откроется только первая грань;
+msg.volume = - это объёмная текстура ({depth} срезов): откроется только первый срез;
+msg.format_note = Формат: {format}
+msg.layer_error = Не удалось прочитать слой «{name}» документа.
+
+about.title = О плагине VTF Export
+about.text = VTF Export {version} для Adobe Photoshop (x64)\n\nОткрытие и сохранение файлов Valve Texture Format (.vtf).\nАнимация открывается слоями; видимые слои можно сохранить как кадры.\nСохранение: DXT1/3/5, BGR(A)8888, RGB(A)8888, 565/4444/5551, I8, IA88, A8,\nприведение к степени двойки, мипмапы (15 фильтров), превью, флаги, версии 7.1 - 7.5.\n\nПапка языков: {folder}\n\nDXT-сжатие: stb_dxt (public domain).

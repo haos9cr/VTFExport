@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{6C1B7E3A-2F4D-4E8B-9A51-3D7C0F2B9E41}</ProjectGuid>
+    <RootNamespace>VTFExport</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+
+  <!--
+    Path to the unpacked Photoshop SDK. The folder must directly contain "pluginsdk".
+    Default: <this folder>\photoshop_sdk\pluginsdk\...
+  -->
+  <PropertyGroup>
+    <PhotoshopSdkDir Condition="'$(PhotoshopSdkDir)'==''">$(MSBuildThisFileDirectory)photoshop_sdk\</PhotoshopSdkDir>
+    <PsApi>$(PhotoshopSdkDir)pluginsdk\photoshopapi\</PsApi>
+    <PsSamples>$(PhotoshopSdkDir)pluginsdk\samplecode\</PsSamples>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <PropertyGroup>
+    <TargetName>VTFExport</TargetName>
+    <TargetExt>.8bi</TargetExt>
+    <OutDir>$(MSBuildThisFileDirectory)bin\$(Configuration)\</OutDir>
+    <IntDir>$(MSBuildThisFileDirectory)obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>WIN32=1;_WINDOWS;_WIN32_WINNT=0x0601;ISOLATION_AWARE_ENABLED=1;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)src;$(IntDir);$(PsApi)photoshop;$(PsApi)pica_sp;$(PsSamples)common\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)src;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>user32.lib;advapi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Message>Checking Photoshop SDK path, embedding language files...</Message>
+      <Command>if not exist "$(PsApi)photoshop\PIFormat.h" (
+  echo ERROR: Photoshop SDK not found. Expected "$(PsApi)photoshop\PIFormat.h".
+  echo Unpack the SDK so that "photoshop_sdk\pluginsdk" exists next to VTFExport.sln.
+  exit /b 1
+)
+powershell -NoProfile -ExecutionPolicy Bypass -File "$(MSBuildThisFileDirectory)tools\embed_lang.ps1" -LangDir "$(MSBuildThisFileDirectory)lang" -Out "$(IntDir)lang_embedded.inc"
+if errorlevel 1 exit /b 1</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message>Creating the VTFExport_lang folder with the translation template...</Message>
+      <Command>if not exist "$(OutDir)VTFExport_lang" mkdir "$(OutDir)VTFExport_lang"
+copy /Y "$(MSBuildThisFileDirectory)lang\template.lang.txt" "$(OutDir)VTFExport_lang\template.lang.txt" &gt;nul
+exit /b 0</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <ClCompile Include="src\VTFExport.cpp" />
+    <ClCompile Include="src\VTFExportUI.cpp" />
+    <ClCompile Include="src\VtfWriter.cpp" />
+    <ClCompile Include="src\VtfReader.cpp" />
+    <ClCompile Include="src\Lang.cpp" />
+    <ClCompile Include="src\Resample.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\VTFExport.h" />
+    <ClInclude Include="src\VtfWriter.h" />
+    <ClInclude Include="src\VtfReader.h" />
+    <ClInclude Include="src\Lang.h" />
+    <ClInclude Include="src\Resample.h" />
+    <ClInclude Include="src\Version.h" />
+    <None Include="lang\*.lang" />
+    <None Include="tools\embed_lang.ps1" />
+    <ClInclude Include="src\resource.h" />
+    <ClInclude Include="third_party\stb_dxt.h" />
+  </ItemGroup>
+
+  <!-- PiPL: preprocess VTFExport.r with cl /EP, then convert with the SDK's Cnvtpipl.exe. -->
+  <ItemGroup>
+    <CustomBuild Include="src\VTFExport.r">
+      <FileType>Document</FileType>
+      <Message>Compiling PiPL resource...</Message>
+      <Command>cl /nologo /I"$(PsApi)pica_sp" /I"$(PsApi)photoshop" /I"$(PsApi)resources" /I"$(PsSamples)common\resources" /I"$(PsSamples)common\includes" /EP /DMSWindows=1 /D_WIN64=1 /Tc"%(FullPath)" &gt; "$(IntDir)%(Filename).rr"
+if errorlevel 1 exit /b 1
+"$(PsSamples)resources\Cnvtpipl.exe" "$(IntDir)%(Filename).rr" "$(IntDir)%(Filename).pipl"
+if errorlevel 1 exit /b 1
+del "$(IntDir)%(Filename).rr"</Command>
+      <Outputs>$(IntDir)%(Filename).pipl;%(Outputs)</Outputs>
+      <LinkObjects>false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\VTFExport.rc" />
+  </ItemGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

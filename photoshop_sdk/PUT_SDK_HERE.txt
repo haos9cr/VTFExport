@@ -1,0 +1,12 @@
+Put the Adobe Photoshop C++ SDK (Windows) here, so that this file exists:
+
+    photoshop_sdk\pluginsdk\photoshopapi\photoshop\PIFormat.h
+
+Download: https://developer.adobe.com/developer-console/ -> APIs and services ->
+Photoshop Plug-In and Connection SDK (free, Adobe ID required).
+The SDK may not be redistributed, so it is not part of the repository.
+
+---
+
+Положите сюда Adobe Photoshop C++ SDK (Windows) так, чтобы существовал файл выше.
+SDK нельзя распространять, поэтому его нет в репозитории.

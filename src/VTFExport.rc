@@ -1,0 +1,102 @@
+// VTFExport.rc - dialog and PiPL resources (UTF-8).
+// Captions are placeholders: the real texts are set at runtime from Lang.cpp
+// and the language files (see ApplyTexts() in VTFExportUI.cpp).
+#pragma code_page(65001)
+
+#include <windows.h>
+#include "resource.h"
+#include "Version.h"
+
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+
+IDD_VTF_OPTIONS DIALOGEX 0, 0, 410, 316
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "VTF"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "", IDC_INFO, 7, 7, 220, 9
+    RTEXT           "Language:", IDC_LBL_LANG, 230, 7, 70, 9
+    COMBOBOX        IDC_LANG, 303, 5, 100, 160, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Format", IDC_GRP_FORMAT, 7, 20, 250, 46
+    LTEXT           "", IDC_LBL_FORMAT, 14, 33, 44, 9
+    COMBOBOX        IDC_FORMAT, 60, 31, 190, 240, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "", IDC_LBL_VERSION, 14, 49, 44, 9
+    COMBOBOX        IDC_VERSION, 60, 47, 50, 100, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Resize", IDC_GRP_RESIZE, 7, 70, 250, 94
+    AUTOCHECKBOX    "", IDC_RESIZE, 14, 82, 236, 10
+    LTEXT           "", IDC_LBL_METHOD, 24, 97, 82, 9
+    COMBOBOX        IDC_METHOD, 108, 95, 142, 100, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "", IDC_LBL_RFILTER, 24, 113, 82, 9
+    COMBOBOX        IDC_RFILTER, 108, 111, 142, 220, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "", IDC_LBL_MAXW, 24, 129, 82, 9
+    COMBOBOX        IDC_MAXW, 108, 127, 80, 200, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "", IDC_LBL_MAXH, 24, 145, 82, 9
+    COMBOBOX        IDC_MAXH, 108, 143, 80, 200, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Mipmaps", IDC_GRP_MIPS, 7, 168, 250, 68
+    AUTOCHECKBOX    "", IDC_MIPMAPS, 14, 180, 236, 10
+    LTEXT           "", IDC_LBL_MIPFILTER, 24, 195, 82, 9
+    COMBOBOX        IDC_MIPFILTER, 108, 193, 142, 220, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    AUTOCHECKBOX    "", IDC_GAMMA, 14, 210, 236, 10
+    AUTOCHECKBOX    "", IDC_THUMB, 14, 222, 236, 10
+
+    GROUPBOX        "Animation", IDC_GRP_ANIM, 7, 240, 250, 52
+    AUTOCHECKBOX    "", IDC_ANIMATE, 14, 252, 236, 10
+    LTEXT           "", IDC_LBL_ORDER, 24, 267, 82, 9
+    COMBOBOX        IDC_ORDER, 108, 265, 142, 100, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "", IDC_ANIM_HINT, 24, 280, 226, 9
+
+    GROUPBOX        "Flags", IDC_GRP_FLAGS, 263, 20, 140, 272
+    AUTOCHECKBOX    "", 1100, 270, 33, 128, 10
+    AUTOCHECKBOX    "", 1101, 270, 46, 128, 10
+    AUTOCHECKBOX    "", 1102, 270, 59, 128, 10
+    AUTOCHECKBOX    "", 1103, 270, 72, 128, 10
+    AUTOCHECKBOX    "", 1104, 270, 85, 128, 10
+    AUTOCHECKBOX    "", 1105, 270, 98, 128, 10
+    AUTOCHECKBOX    "", 1106, 270, 111, 128, 10
+    AUTOCHECKBOX    "", 1107, 270, 124, 128, 10
+    AUTOCHECKBOX    "", 1108, 270, 137, 128, 10
+    AUTOCHECKBOX    "", 1109, 270, 150, 128, 10
+    AUTOCHECKBOX    "", 1110, 270, 163, 128, 10
+    AUTOCHECKBOX    "", 1111, 270, 176, 128, 10
+    AUTOCHECKBOX    "", 1112, 270, 189, 128, 10
+    AUTOCHECKBOX    "", 1113, 270, 202, 128, 10
+    AUTOCHECKBOX    "", 1114, 270, 215, 128, 10
+    AUTOCHECKBOX    "", 1115, 270, 228, 128, 10
+
+    PUSHBUTTON      "Reset", IDC_RESET, 7, 296, 60, 14
+    DEFPUSHBUTTON   "Save", IDOK, 279, 296, 60, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 343, 296, 60, 14
+END
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     VTFEXPORT_VERSION_MAJOR, VTFEXPORT_VERSION_MINOR, VTFEXPORT_VERSION_PATCH, 0
+PRODUCTVERSION  VTFEXPORT_VERSION_MAJOR, VTFEXPORT_VERSION_MINOR, VTFEXPORT_VERSION_PATCH, 0
+FILEFLAGSMASK   0x3fL
+FILEFLAGS       0x0L
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_DLL
+FILESUBTYPE     0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "VTF Export - Valve Texture Format plug-in for Adobe Photoshop"
+            VALUE "FileVersion", VTFEXPORT_VERSION_STR
+            VALUE "InternalName", "VTFExport"
+            VALUE "OriginalFilename", "VTFExport.8bi"
+            VALUE "ProductName", "VTF Export"
+            VALUE "ProductVersion", VTFEXPORT_VERSION_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+// PiPL resource produced by Cnvtpipl from VTFExport.r (see the .vcxproj custom build step).
+#include "VTFExport.pipl"

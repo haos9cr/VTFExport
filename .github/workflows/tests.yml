@@ -1,0 +1,19 @@
+# Core tests (encoder, decoder, filters, animation) on every push / PR.
+# The plug-in itself needs the Photoshop SDK and is built locally;
+# its Wine-based tests run with `tests/run_tests.sh --wine`.
+name: tests
+on:
+  push:
+    paths: ["src/**", "tests/**", "third_party/**", "lang/**", "tools/**", ".github/workflows/tests.yml"]
+  pull_request:
+    paths: ["src/**", "tests/**", "third_party/**", "lang/**", "tools/**", ".github/workflows/tests.yml"]
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: pip install srctools
+      - run: bash tests/run_tests.sh

@@ -1,0 +1,95 @@
+# VTF Export language file template (all strings in English).
+#
+# Two ways to use a translation:
+#  a) Built into the plug-in: put the file into the project's lang\ folder
+#     (e.g. lang\pl.lang) and rebuild. Check it with: python tools/check_lang.py
+#  b) Without rebuilding: put it into the VTFExport_lang folder next to VTFExport.8bi.
+#     A file there with the same language.code as a built-in language only
+#     overrides the strings it contains.
+#
+# Set language.name (shown in the list) and language.code, translate the values.
+# Keys you delete fall back to English. Encoding: UTF-8, extension: .lang.
+# \n = line break. {w}, {error}, ... are placeholders and must stay as they are.
+
+language.name = My language
+language.code = xx
+
+
+dlg.title = Save VTF
+dlg.size = Size: {w} x {h}
+dlg.size_resized = Size: {w} x {h}  →  {tw} x {th}
+dlg.language = Language:
+dlg.language_auto = Auto
+dlg.group_format = Format
+dlg.format = Format:
+dlg.version = Version:
+dlg.group_resize = Resize
+dlg.resize = Resize to a power of two
+dlg.resize_method = Method:
+dlg.resize_filter = Filter:
+dlg.max_width = Max width:
+dlg.max_height = Max height:
+dlg.no_limit = No limit
+
+resize.nearest = Nearest power of two
+resize.biggest = Larger power of two
+resize.smallest = Smaller power of two
+
+dlg.group_mips = Mipmaps and thumbnail
+dlg.mipmaps = Generate mipmaps
+dlg.mip_filter = Mipmap filter:
+dlg.gamma = Gamma-correct filtering (resize and mipmaps)
+dlg.thumb = Create thumbnail
+dlg.group_anim = Animation
+dlg.animate = Layers → animation frames (visible layers: {n})
+dlg.frame_order = Frame order:
+dlg.anim_hint = Layer effects and blend modes are not applied.
+
+order.bottom_up = Bottom to top (bottom layer = frame 1)
+order.top_down = Top to bottom (top layer = frame 1)
+
+dlg.group_flags = Texture flags
+dlg.reset = Reset
+dlg.save = Save
+dlg.cancel = Cancel
+
+fmt.auto_dxt = Auto: DXT1 (no alpha) / DXT5 (alpha)
+fmt.auto_raw = Auto: BGR888 / BGRA8888 (uncompressed)
+fmt.i8 = I8 (grayscale)
+fmt.ia88 = IA88 (grayscale + alpha)
+fmt.a8 = A8 (alpha only)
+
+flag.point_sample = Point Sample
+flag.trilinear = Trilinear
+flag.anisotropic = Anisotropic
+flag.clamp_s = Clamp S
+flag.clamp_t = Clamp T
+flag.clamp_u = Clamp U
+flag.no_mipmap = No Mipmap
+flag.no_lod = No Level Of Detail
+flag.normal_map = Normal Map
+flag.ssbump = SSBump
+flag.hint_dxt5 = Hint DXT5
+flag.srgb = sRGB
+flag.no_debug_override = No Debug Override
+flag.single_copy = Single Copy
+flag.vertex_texture = Vertex Texture
+flag.border = Border
+
+layer.frame = Frame {n}
+
+msg.title = VTF Export
+msg.mode = VTF: only RGB and Grayscale modes are supported.
+msg.too_big = VTF: the maximum texture size is 65535 x 65535.
+msg.npot = The image size is not a power of two (for example 512 x 256).\nSource Engine may display such a texture incorrectly.\n\nSave anyway?
+msg.encode_error = VTF: encoding error: {error}
+msg.open_error = Cannot open the VTF file: {error}
+msg.too_large = The texture is too large for this version of Photoshop.
+msg.open_partial = Only part of this texture will be opened:
+msg.cubemap = - it is a cubemap ({faces} faces): only the first face is opened;
+msg.volume = - it is a volume texture ({depth} slices): only the first slice is opened;
+msg.format_note = Format: {format}
+msg.layer_error = Cannot read layer "{name}" of the document.
+
+about.title = About VTF Export
+about.text = VTF Export {version} for Adobe Photoshop (x64)\n\nOpens and saves Valve Texture Format (.vtf) files.\nAnimated textures open as layers; visible layers can be saved as frames.\nSaving: DXT1/3/5, BGR(A)8888, RGB(A)8888, 565/4444/5551, I8, IA88, A8,\npower-of-two resize, mipmaps with 15 filters, thumbnail, flags, versions 7.1 - 7.5.\n\nLanguages folder: {folder}\n\nDXT compression: stb_dxt (public domain).
